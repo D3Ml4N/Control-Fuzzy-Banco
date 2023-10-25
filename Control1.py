@@ -34,14 +34,43 @@ probabilidad['media'] = fuzz.trimf(probabilidad.universe, [25, 40, 65])
 probabilidad['alta'] = fuzz.trimf(probabilidad.universe, [50, 60, 70])
 probabilidad['muy_alta'] = fuzz.trimf(probabilidad.universe, [80, 90, 100])
 #-------------------------------------------------------------------------------------
-# Reglas difusas para los casos 4 de estudio
-regla1 = ctrl.Rule(ahorro['muy_alto'] & salario['muy_alto'], probabilidad['muy_alta'])
-regla2 = ctrl.Rule(ahorro['medio'] & salario['alto'], probabilidad['alta'])
-regla3 = ctrl.Rule(ahorro['medio'] & salario['muy_bajo'], probabilidad['baja'])
-regla4 = ctrl.Rule(ahorro['muy_bajo'] & salario['bajo'], probabilidad['muy_baja'])
+# Reglas difusas
+regla1 = ctrl.Rule(ahorro['muy_bajo'] & salario['muy_bajo'], probabilidad['muy_baja'])
+regla2 = ctrl.Rule(ahorro['muy_bajo'] & salario['bajo'], probabilidad['muy_baja'])
+regla3 = ctrl.Rule(ahorro['muy_bajo'] & salario['medio'], probabilidad['muy_baja'])
+regla4 = ctrl.Rule(ahorro['muy_bajo'] & salario['alto'], probabilidad['baja'])
+regla5 = ctrl.Rule(ahorro['muy_bajo'] & salario['muy_alto'], probabilidad['media'])
+
+regla6 = ctrl.Rule(ahorro['bajo'] & salario['muy_bajo'], probabilidad['baja'])
+regla7 = ctrl.Rule(ahorro['bajo'] & salario['bajo'], probabilidad['baja'])
+regla8 = ctrl.Rule(ahorro['bajo'] & salario['medio'], probabilidad['media'])
+regla9 = ctrl.Rule(ahorro['bajo'] & salario['alto'], probabilidad['media'])
+regla10 = ctrl.Rule(ahorro['bajo'] & salario['muy_alto'], probabilidad['media'])
+
+regla11 = ctrl.Rule(ahorro['medio'] & salario['muy_bajo'], probabilidad['baja'])
+regla12 = ctrl.Rule(ahorro['medio'] & salario['bajo'], probabilidad['baja'])
+regla13 = ctrl.Rule(ahorro['medio'] & salario['medio'], probabilidad['media'])
+regla14 = ctrl.Rule(ahorro['medio'] & salario['alto'], probabilidad['alta'])
+regla15 = ctrl.Rule(ahorro['medio'] & salario['muy_alto'], probabilidad['alta'])
+
+regla16 = ctrl.Rule(ahorro['alto'] & salario['muy_bajo'], probabilidad['baja'])
+regla17 = ctrl.Rule(ahorro['alto'] & salario['bajo'], probabilidad['media'])
+regla18 = ctrl.Rule(ahorro['alto'] & salario['medio'], probabilidad['media'])
+regla19 = ctrl.Rule(ahorro['alto'] & salario['alto'], probabilidad['alta'])
+regla20 = ctrl.Rule(ahorro['alto'] & salario['muy_alto'], probabilidad['muy_alta'])
+
+regla21 = ctrl.Rule(ahorro['muy_alto'] & salario['muy_bajo'], probabilidad['media'])
+regla22 = ctrl.Rule(ahorro['muy_alto'] & salario['bajo'], probabilidad['media'])
+regla23 = ctrl.Rule(ahorro['muy_alto'] & salario['medio'], probabilidad['alta'])
+regla24 = ctrl.Rule(ahorro['muy_alto'] & salario['alto'], probabilidad['muy_alta'])
+regla25 = ctrl.Rule(ahorro['muy_alto'] & salario['muy_alto'], probabilidad['muy_alta'])
+
+
 
 sistema_control = ctrl.ControlSystem([
-    regla1, regla2, regla3, regla4, 
+    regla1, regla2, regla3, regla4,regla5, regla6, regla7, regla8,
+    regla9,regla10,regla11,regla12,regla13,regla14,regla15,regla16,regla17,regla18,regla19,
+    regla20,regla21,regla22,regla23,regla24,regla25
 ])
 #-------------------------------------------------------------------------------------
 # Simulación del Sistema de Control Fuzzy
